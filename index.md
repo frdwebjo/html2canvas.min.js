@@ -1,37 +1,149 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/frdwebjo/html2canvas.min.js/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>مولد صور المواضيع | مينت ويب</title>
+	<meta name="viewport" content="height=device-height, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="input">
+		<select id='bg-color'>
+			<option disabled="disabled" selected="selected">اختر الخلفية</option>
+			<option>أحمر</option>
+			<option>زهري</option>
+			<option>أرجواني</option>
+			<option>أرجواني غامق</option>
+			<option>نيلي</option>
+			<option>أزرق</option>
+			<option>أزرق فاتح</option>
+			<option>ازرق سماوي</option>
+			<option>تركواز</option>
+			<option>أخضر</option>
+			<option>أخضر فاتح</option>
+			<option>جيري</option>
+			<option>الأصفر</option>
+			<option>كهرماني</option>
+			<option>برتقالي</option>
+			<option>برتقالي غامق</option>
+			<option>بني</option>
+			<option>رمادي</option>
+			<option>رمادي مزرق</option>
+		</select>
+		<select id='bg-styles'>
+			<option disabled="disabled" selected="selected">حدد نمط</option>
+			<option value="sty1">خلفية 1</option>
+			<option value="sty2">خلفية 2</option>
+			<option value="sty3">خلفية 3</option>
+			<option value="sty4">خلفية 4</option>
+			<option value="sty5">خلفية 5</option>
+			<option value="sty6">خلفية 6</option>
+			<option value="sty7">خلفية 7</option>
+			<option value="sty8">خلفية 8</option>
+			<option value="sty9">خلفية 9</option>
+			<option value="sty10">خلفية 10</option>
+			<option value="sty11">خلفية 11</option>
+			<option value="sty12">خلفية 12</option>
+			<option value="sty13">خلفية 13</option>
+		</select>
+        <input type="text" id="label1" placeholder="تسمية المقال">
+        <br/>
+        <input type="text" id="title1" placeholder="عنوان المقال">
+        <br/>
+        <input type="text" id="author" placeholder="أسم الكاتب">
+        <br/>
+        <input type="text" id="btitle1" placeholder="عنوان المدونة">
+	</div>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+	<div class="background" id="background">
+		<div class="content-container" >
+			<div class="header-container">
+				<div class="blocks" id="blocks"></div>
+				<div class="author-name" id="categories">تسمية المقال</div>
+			</div>
+			<div class="separate">
+				<div id="content-title1" class="content-title">عنوان المقال</div>
+			</div>
+			<div class="footer-container">
+<div class="author-name" id="author-name">@ أسم الكاتب</div>
+				<div class="elc" id="elc">
+					التقنية العربية
+					<div class="img-logo" style="display: none;">
+						<img src="./images/logo.png">
+					</div>
+				</div>
+			</div>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+			<div id='content-container'></div>
+		</div>
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+	</div>
+	
+	<div class="btnnn">	
+		<a id="btn-Preview-Image" href="#previewImage">
+			عرض الصورة
+		</a>
+	</div>
+	
+	<div id="previewImage"></div> 
+    <p><strong>معلومة</strong>* انقر على زر معاينة الصورة ، وانقر بزر الماوس الأيمن على الصورة&gt; حفظ الصورة باسم ... لحفظ الصورة</p>
+	
+	<footer class="footer">
+		مولد صور المواضيع تطويرالتقنية العربية - <a href="https://www.tech-arabic.com/" target="_blank" alt="التقنية العربية">التقنية العربية</a>
+	</footer>
+	
+	<script src="jquery-3.5.0.min.js" type="text/javascript"></script>
+	<script src="html2canvas.min.js" type="text/javascript"></script>
+	<script>
+		$(document).ready(function() { 
+			// Global variable 
+			var element = $(".content-container");
+			var getCanvas;  
 
-- Bulleted
-- List
+			$("#btn-Preview-Image").on('click', function() { 
 
-1. Numbered
-2. List
+				html2canvas(element, { 
+					onrendered: function(canvas) { 
+						$("#previewImage").html(canvas); 
+						getCanvas = canvas;
+						
+					}
+				});
+			});
 
-**Bold** and _Italic_ and `Code` text
+			// Begin Here
+			var input = document.getElementById("input"), judul1 = document.getElementById("title1"), author = document.getElementById("author"), category = document.getElementById("category"), bgcl = document.getElementById("bg-color"), backgroundSty = document.getElementById("bg-styles"), categories = document.getElementById("categories");
 
-[Link](url) and ![Image](src)
-```
+			// Keyup
+			input.onkeyup = function() {
+				document.getElementById("categories").innerHTML = label1.value;
+				document.getElementById("content-title1").innerHTML = judul1.value;
+				document.getElementById("elc").innerHTML = btitle1.value;
+				document.getElementById("author-name").innerHTML = "" + " " + author.value;
+			};
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+			
 
-### Jekyll Themes
+			document.getElementById("bg-color").addEventListener("change", function() {
+				var a = "#d32f2f #c2185b #7b1fa2 #512da8 #303f9f #1976d2 #0288d1 #0097a7 #00796b #388e3c #689f38 #afb42b #fbc02d #ffa000 #f57c00 #e64a19 #5d4037 #616161 #455a64".split(" ")[bgcl.selectedIndex];
+				document.getElementById("content-container").style.backgroundColor = a;
+			});
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/frdwebjo/html2canvas.min.js/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+			$("#bg-styles").data("oldVal", $("#bg-styles").val());
+			$("#bg-styles").change(function() {
+				var a = $(this), b = a.val(), c = a.data("oldVal");
+				a.data("oldVal", b);
+				$("#content-container").removeClass(c).addClass(b);
+			});
+		}); 
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+		// Select
+		function check(a) {
+			document.getElementById("categories").innerHTML = category.options[category.selectedIndex].value;
+		}
+	</script>
+</body>
+</html>
